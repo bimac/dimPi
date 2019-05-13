@@ -1,0 +1,8 @@
+[submodule "lan951x-led-ctl"]
+	path = lan951x-led-ctl
+	url = https://mockmoon-cybernetics.ch/cgi/cgit/lan951x-led-ctl.git
+	branch = master
+[submodule "lan7800-led-ctl"]
+	path = lan7800-led-ctl
+	url = https://mockmoon-cybernetics.ch/cgi/cgit/lan7800-led-ctl.git
+	branch = master
