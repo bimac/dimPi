@@ -1,6 +1,6 @@
 # dimPi
 dimPi is a simple shell script for controlling a Raspberry Pi's onboard LEDs (ACT, PWR, LNK, SPD and SND).
-It contains `lan951x-led-ctl` and `lan7800-led-ctl` by Dominic Radermacher as git modules.
+It contains `lan951x-led-ctl` [1] and `lan7800-led-ctl` [2] by Dominic Radermacher as git modules.
 
 Use `git clone --recursive https://github.com/poulet-lab/dimPi.git` to obtain a local clone of the repository, including the submodules.
 
@@ -18,4 +18,8 @@ dimPi takes a single argument:
   * `s` - return all LEDs to their default state.
 
 # Warning
-So far, I have only tested the script on a _Raspberry Pi Model 3B_ running _Raspbian_. It should, however, work on all RaspberryPis using a _LAN951x_ or _LAN7800_ Ethernet controller and running a _Debian_ derivative. _dimPi_ will currently **not** work correctly on a _Pi Zero_ board (this may be addressed at a later point).
+So far, I have only tested the script on a _Raspberry Pi Model 3B_ running _Raspbian_. I expect it to run on all RaspberryPis using a _LAN951x_ or _LAN7800_ Ethernet controller and running a Debian derivative (_rasbian_, _Noobs_, ...). However, dimPi will currently **not** work correctly on a _Pi Zero_ board (this may be addressed at a later point).
+
+# References
+[1] https://mockmoon-cybernetics.ch/computer/raspberry-pi/lan951x-led-ctl/  
+[2] https://mockmoon-cybernetics.ch/computer/raspberry-pi/lan7800-led-ctl/
