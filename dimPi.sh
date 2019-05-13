@@ -18,6 +18,13 @@ elif [[ ! $1 =~ ^[01s]$ ]]; then
 	exit
 fi
 
+# Check for usbutils
+PKG_USB=$(dpkg-query -W --showformat='${Status}\n' usbutils|grep "install ok installed")
+if [[ "" == "$PKG_USB" ]]; then
+	echo "dimPi depends on the usbutils package - please provide it."
+	exit
+fi
+
 # Obtain base directory of this BASH script
 BASEDIR=$(cd `dirname $0` && pwd)
 
@@ -37,7 +44,7 @@ fi
 # Compile LEDCTL if necessary
 if [[ ! -z $LEDCTL && ! -x $BASEDIR/$LEDCTL/$LEDCTL ]]; then
 
-	# Check for nexessary packages
+	# Check for necessary packages
 	PKG_GCC=$(dpkg-query -W --showformat='${Status}\n' gcc|grep "install ok installed")
 	PKG_USB=$(dpkg-query -W --showformat='${Status}\n' libusb-1.0-0-dev|grep "install ok installed")
 	if [[ "" == "$PKG_GCC" || "" == "$PKG_USB" ]]; then
