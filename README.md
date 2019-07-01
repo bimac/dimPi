@@ -21,5 +21,5 @@ dimPi takes a single argument:
 So far, I have only tested the script on a _Raspberry Pi Model 3B_ running _Raspbian_. I expect it to run on all RaspberryPis using a _LAN951x_ or _LAN7800_ Ethernet controller and running a Debian derivative (_rasbian_, _Noobs_, ...). However, dimPi will currently **not** work correctly on a _Pi Zero_ board (this may be addressed at a later point).
 
 # References
-[1] https://mockmoon-cybernetics.ch/computer/raspberry-pi/lan951x-led-ctl/  
-[2] https://mockmoon-cybernetics.ch/computer/raspberry-pi/lan7800-led-ctl/
+[1] https://mockmoon-cybernetics.ch/cgi/cgit/linux/lan951x-led-ctl.git
+[2] https://mockmoon-cybernetics.ch/cgi/cgit/linux/lan7800-led-ctl.git
