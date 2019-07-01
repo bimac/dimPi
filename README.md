@@ -22,4 +22,5 @@ So far, I have only tested the script on a _Raspberry Pi Model 3B_ running _Rasp
 
 # References
 [1] https://mockmoon-cybernetics.ch/cgi/cgit/linux/lan951x-led-ctl.git
+
 [2] https://mockmoon-cybernetics.ch/cgi/cgit/linux/lan7800-led-ctl.git
