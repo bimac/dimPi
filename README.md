@@ -1,13 +1,18 @@
 # dimPi
 dimPi is a simple shell script for controlling a Raspberry Pi's onboard LEDs (ACT, PWR, LNK, SPD and SND).
+By default, it disables all LEDs directly after boot-up.
 It contains `lan951x-led-ctl` [1] and `lan7800-led-ctl` [2] by Dominic Radermacher as git modules.
 
-Use `git clone --recursive https://github.com/poulet-lab/dimPi.git` to obtain a local clone of the repository, including the submodules. Change to the cloned `dimPi` directory and execute `install.sh` as root. The install script will fetch the necessary dependencies via `apt`, compile the sources and move everything in its place. It will also enable dimPi.service to automatically disable all LEDs after booting up.
+Use `git clone --recursive https://github.com/poulet-lab/dimPi.git` to obtain a local clone of the repository, including the submodules.
+Change to the cloned `dimPi` directory and execute `install.sh` as root.
+The install script will fetch the necessary dependencies via `apt`, compile the sources and move everything in its place.
+It will also enable dimPi.service to automatically disable all LEDs after booting up.
 
-# Dependencies (will be fetched by the install script)
+# Dependencies
 * `gcc`
 * `usbutils`
 * `libusb-1.0-0-dev`.
+The install script will try to fetch these dependencies automatically.
 
 # Usage
 dimPi takes a single argument:
