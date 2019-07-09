@@ -56,12 +56,12 @@ if ! [[ -z "$LEDCTL" ]]; then
 	(cd "$BASEDIR/$LEDCTL" && make)
 
 	# Copy LEDCTL to /usr/local/bin
-	echo "Copying $LEDCTL to $TARGETDIR ..."
 	cp --no-preserve=owner "$BASEDIR/$LEDCTL/$LEDCTL" "$TARGETDIR"
+	echo "Copyied $LEDCTL to $TARGETDIR."
 
 	# Create symlink to LEDCTL
-	echo "Creating symlink $TARGETDIR/led-ctl -> $TARGETDIR/$LEDCTL ..."
 	ln -sf "$TARGETDIR/$LEDCTL" "$TARGETDIR/led-ctl"
+	echo "Created symlink $TARGETDIR/led-ctl → $TARGETDIR/$LEDCTL."
 fi
 
 # Copy dimPi.sh to target directory
@@ -69,12 +69,12 @@ echo "Copying dimPi.sh to $TARGETDIR ..."
 cp --no-preserve=owner "$BASEDIR/dimPi.sh" "$TARGETDIR"
 
 # Create symlink to dimPi
-echo "Creating symlink /usr/local/bin/dimPi -> $TARGETDIR/dimPi.sh"
 ln -sf "$TARGETDIR/dimPi.sh" "/usr/local/bin/dimPi"
+echo "Created symlink /usr/local/bin/dimPi → $TARGETDIR/dimPi.sh."
 
 # Copy system.d service
-echo "Copying dimPi.service to /etc/systemd/system ..."
 cp --no-preserve=owner $BASEDIR/dimPi.service /etc/systemd/system
+echo "Copyied dimPi.service to /etc/systemd/system."
 
 # Enable and start dimPi service
 systemctl enable dimPi.service
