@@ -62,7 +62,7 @@ if ! [[ -z "$LEDCTL" ]]; then
 
 	# Create symlink to LEDCTL
 	echo "Creating symlink $TARGETDIR/lan-led-ctl -> $TARGETDIR/$LEDCTL ..."
-	ln -s "$TARGETDIR/$LEDCTL" "$TARGETDIR/lan-led-ctl"
+	ln -sf "$TARGETDIR/$LEDCTL" "$TARGETDIR/lan-led-ctl"
 
 fi
 
