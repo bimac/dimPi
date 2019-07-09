@@ -29,14 +29,14 @@ if ! dpkg -s $DEPENDENCIES >/dev/null 2>&1; then
 	fi
 fi
 
-# Get current directory
+# Get current directory, define target directory
 BASEDIR=$(cd `dirname $BASH_SOURCE` && pwd)
+TARGETDIR="/opt/dimPi/bin"
+mkdir -p "$TARGETDIR"
 
-# Obtain hardware ID of Ethernet adapter
+# Identify Ethernet adapter
 REGEXP_ID="[[:alnum:]]{4}:[[:alnum:]]{4}(?=.*Ethernet)"
 HWID=$(lsusb | grep -o -P -m1 $REGEXP_ID)
-
-# Set name of LEDCTL program
 if [[ $HWID == "0424:ec00" ]]; then
 	LEDCTL="lan951x-led-ctl"
 	echo "Detected LAN9512/LAN9514-Ethernet conroller."
@@ -56,23 +56,25 @@ if ! [[ -z "$LEDCTL" ]]; then
 	(cd "$BASEDIR/$LEDCTL" && make)
 
 	# Copy LEDCTL to /usr/local/bin
-	TARGETDIR="/usr/local/bin"
 	echo "Copying $LEDCTL to $TARGETDIR ..."
-	cp "$BASEDIR/$LEDCTL/$LEDCTL" "$TARGETDIR"
+	cp --no-preserve=owner "$BASEDIR/$LEDCTL/$LEDCTL" "$TARGETDIR"
 
 	# Create symlink to LEDCTL
-	echo "Creating symlink $TARGETDIR/lan-led-ctl -> $TARGETDIR/$LEDCTL ..."
-	ln -sf "$TARGETDIR/$LEDCTL" "$TARGETDIR/lan-led-ctl"
-
+	echo "Creating symlink $TARGETDIR/led-ctl -> $TARGETDIR/$LEDCTL ..."
+	ln -sf "$TARGETDIR/$LEDCTL" "$TARGETDIR/led-ctl"
 fi
 
-# Copy DIMPI to /usr/local/bin
-echo "Copying dimPi.sh to $TARGETDIR/dimPi ..."
-cp "$BASEDIR/dimPi.sh" "$TARGETDIR/dimPi"
+# Copy dimPi.sh to target directory
+echo "Copying dimPi.sh to $TARGETDIR ..."
+cp --no-preserve=owner "$BASEDIR/dimPi.sh" "$TARGETDIR"
+
+# Create symlink to dimPi
+echo "Creating symlink /usr/local/bin/dimPi -> $TARGETDIR/dimPi.sh"
+ln -sf "$TARGETDIR/dimPi.sh" "/usr/local/bin/dimPi"
 
 # Copy system.d service
 echo "Copying dimPi.service to /etc/systemd/system ..."
-cp $BASEDIR/dimPi.service /etc/systemd/system
+cp --no-preserve=owner $BASEDIR/dimPi.service /etc/systemd/system
 
 # Enable and start dimPi service
 systemctl enable dimPi.service

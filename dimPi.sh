@@ -19,7 +19,7 @@ elif [[ ! $1 =~ ^[01s]$ ]]; then
 fi
 
 # Execute LEDCTL (if available)
-LEDCTL="/usr/local/bin/lan-led-ctl"
+LEDCTL="/opt/dimPi/bin/led-ctl"
 if [[ -x $LEDCTL ]]; then
 	($LEDCTL --fdx=$1 --lnk=$1 --spd=$1 &>/dev/null)
 fi
