@@ -17,9 +17,9 @@ The install script will try to fetch these dependencies automatically.
 
 # Usage
 dimPi takes a single argument:
-  * `0` - disable all LEDs,
-  * `1` - enable all LEDs, or
-  * `s` - return all LEDs to their default state.
+  * `dimPi 0` - disable all LEDs,
+  * `dimPi 1` - enable all LEDs, or
+  * `dimPi s` - return all LEDs to their default state.
   
 Alternatively, use the supplied systemd service:
   * `sudo systemctl start dimPi` - disable all LEDs, or
