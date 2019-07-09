@@ -22,8 +22,8 @@ dimPi takes a single argument:
   * `dimPi s` - return all LEDs to their default state.
   
 Alternatively, use the supplied systemd service:
-  * `sudo systemctl start dimPi` - disable all LEDs, or
-  * `sudo systemctl stop dimPi` - return all LEDs to their default state.
+  * `systemctl start dimPi` - disable all LEDs, or
+  * `systemctl stop dimPi` - return all LEDs to their default state.
 
 # Warning
 So far, I have only tested the script on a _Raspberry Pi Model 3B_ running _Raspbian_. I expect it to run on all RaspberryPis using a _LAN951x_ or _LAN7800_ Ethernet controller and running a Debian derivative (_rasbian_, _Noobs_, ...). However, dimPi will currently **not** work correctly on a _Pi Zero_ board (this may be addressed at a later point).
