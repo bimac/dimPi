@@ -18,28 +18,9 @@ elif [[ ! $1 =~ ^[01s]$ ]]; then
 	exit 1
 fi
 
-# Check for usbutils
-PKG_USB=$(dpkg-query -W --showformat='${Status}\n' usbutils|grep "install ok installed")
-if [[ "" == "$PKG_USB" ]]; then
-	echo "dimPi depends on the usbutils package - please provide it."
-	exit 1
-fi
-
-# Obtain hardware ID of Ethernet adapter
-REGEXP_ID="[[:alnum:]]{4}:[[:alnum:]]{4}(?=.*Ethernet)"
-HWID=$(lsusb | grep -o -P -m1 $REGEXP_ID)
-
-# Set name of LEDCTL program
-if [[ $HWID == "0424:ec00" ]]; then
-	LEDCTL="lan951x-led-ctl"
-elif [[ $HWID == "0424:7800" ]]; then
-	LEDCTL="lan7800-led-ctl"
-else
-	LEDCTL=""
-fi
-
-# Execute LEDCTL
-if [[ ! -z $LEDCTL ]]; then
+# Execute LEDCTL (if available)
+LEDCTL="/usr/local/bin/lan-led-ctl"
+if [[ -x $LEDCTL ]]; then
 	($LEDCTL --fdx=$1 --lnk=$1 --spd=$1 &>/dev/null)
 fi
 

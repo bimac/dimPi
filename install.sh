@@ -39,20 +39,32 @@ HWID=$(lsusb | grep -o -P -m1 $REGEXP_ID)
 # Set name of LEDCTL program
 if [[ $HWID == "0424:ec00" ]]; then
 	LEDCTL="lan951x-led-ctl"
+	echo "Detected LAN9512/LAN9514-Ethernet conroller."
 elif [[ $HWID == "0424:7800" ]]; then
 	LEDCTL="lan7800-led-ctl"
+	echo "Detected LAN7800-Ethernet controller."
 else
 	LEDCTL=""
+	echo "No supported Ethernet controller found."
 fi
 
-# Compile LEDCTL
-echo "Compiling $LEDCTL ..."
-(cd "$BASEDIR/$LEDCTL" && make)
+# Compile and install LEDCTL
+if ! [[ -z "$LEDCTL" ]]; then
 
-# Copy LEDCTL to /usr/local/bin
-TARGETDIR="/usr/local/bin"
-echo "Copying $LEDCTL to $TARGETDIR ..."
-cp "$BASEDIR/$LEDCTL/$LEDCTL" "$TARGETDIR"
+	# Compile LEDCTL
+	echo "Compiling $LEDCTL ..."
+	(cd "$BASEDIR/$LEDCTL" && make)
+
+	# Copy LEDCTL to /usr/local/bin
+	TARGETDIR="/usr/local/bin"
+	echo "Copying $LEDCTL to $TARGETDIR ..."
+	cp "$BASEDIR/$LEDCTL/$LEDCTL" "$TARGETDIR"
+
+	# Create symlink to LEDCTL
+	echo "Creating symlink $TARGETDIR/lan-led-ctl -> $TARGETDIR/$LEDCTL ..."
+	ln -s "$TARGETDIR/$LEDCTL" "$TARGETDIR/lan-led-ctl"
+
+fi
 
 # Copy DIMPI to /usr/local/bin
 echo "Copying dimPi.sh to $TARGETDIR/dimPi ..."
