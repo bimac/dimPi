@@ -80,4 +80,4 @@ echo "Copyied dimPi.service to /etc/systemd/system."
 systemctl enable dimPi.service
 systemctl start dimPi.service
 
-echo "Success."
+echo "Done."
