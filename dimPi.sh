@@ -3,7 +3,7 @@
 # This script needs to be run as root ...
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Please run as root."
-	exit
+	exit 1
 fi
 
 # Check argument
@@ -11,22 +11,19 @@ VALIDARGS="Valid arguments are:\n\t0 - disable all LEDs\n\t1 - enable all LEDs\n
 if [[ $# -eq 0 ]]; then
 	echo "No argument supplied."
 	printf "$VALIDARGS"
-	exit
+	exit 1
 elif [[ ! $1 =~ ^[01s]$ ]]; then
 	echo "Wrong argument supplied."
 	printf "$VALIDARGS"
-	exit
+	exit 1
 fi
 
 # Check for usbutils
 PKG_USB=$(dpkg-query -W --showformat='${Status}\n' usbutils|grep "install ok installed")
 if [[ "" == "$PKG_USB" ]]; then
 	echo "dimPi depends on the usbutils package - please provide it."
-	exit
+	exit 1
 fi
-
-# Obtain base directory of this BASH script
-BASEDIR=$(cd `dirname $0` && pwd)
 
 # Obtain hardware ID of Ethernet adapter
 REGEXP_ID="[[:alnum:]]{4}:[[:alnum:]]{4}(?=.*Ethernet)"
@@ -41,27 +38,9 @@ else
 	LEDCTL=""
 fi
 
-# Compile LEDCTL if necessary
-if [[ ! -z $LEDCTL && ! -x $BASEDIR/$LEDCTL/$LEDCTL ]]; then
-
-	# Check for necessary packages
-	PKG_GCC=$(dpkg-query -W --showformat='${Status}\n' gcc|grep "install ok installed")
-	PKG_USB=$(dpkg-query -W --showformat='${Status}\n' libusb-1.0-0-dev|grep "install ok installed")
-	if [[ "" == "$PKG_GCC" || "" == "$PKG_USB" ]]; then
-		echo "Missing dependencies. Compilation of $LEDCTL requires gcc and libusb-1.0-0-dev."
-		exit
-		# echo "Installing dependencies ..."
-		# (apt-get install gcc libusb-1.0-0-dev -y -qq)
-	fi
-
-	# Compile LEDCTL
-	echo "Compiling $LEDCTL ..."
-	(cd "$BASEDIR/$LEDCTL" && make)
-fi
-
 # Execute LEDCTL
 if [[ ! -z $LEDCTL ]]; then
-	($BASEDIR/$LEDCTL/$LEDCTL --fdx=$1 --lnk=$1 --spd=$1 &>/dev/null)
+	($LEDCTL --fdx=$1 --lnk=$1 --spd=$1 &>/dev/null)
 fi
 
 # Toggle ACT & PWR LEDs

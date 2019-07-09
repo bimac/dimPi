@@ -1,0 +1,11 @@
+[Unit]
+Description=dimPi
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/dimPi 0
+ExecStop=/usr/local/bin/dimPi s
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
