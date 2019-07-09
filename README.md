@@ -5,8 +5,8 @@ It contains `lan951x-led-ctl` [1] and `lan7800-led-ctl` [2] by Dominic Radermach
 
 Use `git clone --recursive https://github.com/poulet-lab/dimPi.git` to obtain a local clone of the repository, including the submodules.
 Change to the cloned `dimPi` directory and execute `install.sh` as root.
-The install script will fetch the necessary dependencies via `apt`, compile the sources and move everything in its place.
-It will also enable dimPi.service to automatically disable all LEDs after booting up.
+The install script will fetch the necessary dependencies, compile the sources and move everything in its place.
+It will also enable `dimPi.service` to automatically disable all LEDs after booting up.
 
 # Dependencies
 * `gcc`
