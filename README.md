@@ -13,7 +13,8 @@ It will also enable `dimPi.service` to automatically disable all LEDs after boot
 * `usbutils`
 * `libusb-1.0-0-dev`
 
-The install script will try to fetch these dependencies automatically.
+The dependencies are only necessary for compilation and installation.
+The install script will try to fetch them automatically.
 
 # Usage
 dimPi takes a single argument:
