@@ -46,19 +46,9 @@ compile_ledctl() {
 	echo "Copied $LEDCTL to $TARGETDIR."
 }
 
-# compile lan951x-led-ctl
-if (lsusb | grep -q 0424:ec00); then
-	LEDCTL="lan951x-led-ctl"
-	echo "Detected LAN9512/LAN9514-Ethernet conroller."
-	compile_ledctl
-fi
-
-# compile lan7800-led-ctl
-if (lsusb | grep -q 0424:7800); then
-	LEDCTL="lan7800-led-ctl"
-	echo "Detected LAN7800-Ethernet controller."
-	compile_ledctl
-fi
+# compile LEDCTL
+compile_ledctl "lan951x-led-ctl"
+compile_ledctl "lan7800-led-ctl"
 
 # Copy dimPi.sh to target directory
 cp --no-preserve=owner "$BASEDIR/dimPi.sh" "$TARGETDIR"
