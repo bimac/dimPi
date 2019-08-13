@@ -38,12 +38,12 @@ mkdir -p "$TARGETDIR"
 compile_ledctl() {
 
 	# Compile LEDCTL
-	echo "Compiling $LEDCTL ..."
-	(cd "$BASEDIR/$LEDCTL" && make)
+	echo "Compiling $1 ..."
+	(cd "$BASEDIR/$1" && make)
 
 	# Copy LEDCTL to /usr/local/bin
-	cp --no-preserve=owner "$BASEDIR/$LEDCTL/$LEDCTL" "$TARGETDIR"
-	echo "Copied $LEDCTL to $TARGETDIR."
+	cp --no-preserve=owner "$BASEDIR/$LEDCTL/$1" "$TARGETDIR"
+	echo "Copied $1 to $TARGETDIR."
 }
 
 # compile LEDCTL
