@@ -42,7 +42,7 @@ compile_ledctl() {
 	(cd "$BASEDIR/$1" && make)
 
 	# Copy LEDCTL to /usr/local/bin
-	cp --no-preserve=owner "$BASEDIR/$LEDCTL/$1" "$TARGETDIR"
+	cp --no-preserve=owner "$BASEDIR/$1/$1" "$TARGETDIR"
 	echo "Copied $1 to $TARGETDIR."
 }
 
