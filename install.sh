@@ -34,19 +34,14 @@ BASEDIR=$(cd `dirname $BASH_SOURCE` && pwd)
 TARGETDIR="/opt/dimPi/bin"
 mkdir -p "$TARGETDIR"
 
-# Function for compiling LEDCTL
+# compile LEDCTL
 compile_ledctl() {
-
-	# Compile LEDCTL
 	echo "Compiling $1 ..."
 	(cd "$BASEDIR/$1" && make)
 
-	# Copy LEDCTL to /usr/local/bin
 	cp --no-preserve=owner "$BASEDIR/$1/$1" "$TARGETDIR"
 	echo "Copied $1 to $TARGETDIR."
 }
-
-# compile LEDCTL
 compile_ledctl "lan951x-led-ctl"
 compile_ledctl "lan7800-led-ctl"
 
