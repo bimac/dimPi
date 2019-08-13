@@ -18,10 +18,16 @@ elif [[ ! $1 =~ ^[01s]$ ]]; then
 	exit 1
 fi
 
-# Execute LEDCTL (if available)
-LEDCTL="/opt/dimPi/bin/led-ctl"
+# Execute lan951x-led-ctl
+LEDCTL="/opt/dimPi/bin/lan951x-led-ctl"
 if [[ -x $LEDCTL ]]; then
 	($LEDCTL --fdx=$1 --lnk=$1 --spd=$1 &>/dev/null)
+fi
+
+# Execute lan7800-led-ctl
+LEDCTL="/opt/dimPi/bin/lan7800-led-ctl"
+if [[ -x $LEDCTL ]]; then
+	($LEDCTL --led0=$1 --led1=$1)
 fi
 
 # Toggle ACT & PWR LEDs
