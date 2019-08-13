@@ -19,15 +19,13 @@ elif [[ ! $1 =~ ^[01s]$ ]]; then
 fi
 
 # Execute lan951x-led-ctl
-LEDCTL="/opt/dimPi/bin/lan951x-led-ctl"
-if [[ -x $LEDCTL ]]; then
-	($LEDCTL --fdx=$1 --lnk=$1 --spd=$1 &>/dev/null)
+if (lsusb | grep -q 0424:ec00); then
+	(/opt/dimPi/bin/lan951x-led-ctl --fdx=$1 --lnk=$1 --spd=$1 &>/dev/null)
 fi
 
 # Execute lan7800-led-ctl
-LEDCTL="/opt/dimPi/bin/lan7800-led-ctl"
-if [[ -x $LEDCTL ]]; then
-	($LEDCTL --led0=$1 --led1=$1)
+if (lsusb | grep -q 0424:7800); then
+	(/opt/dimPi/bin/lan7800-led-ctl --led0=$1 --led1=$1 &>/dev/null)
 fi
 
 # Toggle ACT & PWR LEDs
