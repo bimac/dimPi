@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Copyright (C) 2019 Florian Rau <florian.rau@posteo.de>
+#
+# This file is part of dimPi.
+#
+# dimPi is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# dimPi is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with dimPi.  If not, see <https://www.gnu.org/licenses/>.
+
 # Check for root
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Please run as root."
