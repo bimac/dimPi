@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2019 Florian Rau <florian.rau@posteo.de>
+# Copyright (C) 2019 Florian Rau
 #
 # This file is part of dimPi.
 #
